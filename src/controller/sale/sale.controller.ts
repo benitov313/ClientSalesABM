@@ -25,13 +25,13 @@ export class SaleController {
     return this.saleService.findAll();
   }
 
-  @Get('summary/:item')
-  async summarizeByItem(): Promise<Record<string, number>> {
+  @Get('summary/item')
+  async summarizeByItem(): Promise<Sale[]> {
     return this.saleService.summarizeByItem();
   }
 
-  @Get('summary/:client')
-  async summarizeByClient(): Promise<Record<string, number>> {
+  @Get('summary/client')
+  async summarizeByClient(): Promise<Sale[]> {
     return this.saleService.summarizeByClient();
   }
 
