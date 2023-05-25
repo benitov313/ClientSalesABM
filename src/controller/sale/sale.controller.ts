@@ -1,11 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { SaleService } from 'src/service/sale/sale.service';
 import { CreateSaleDto } from 'src/dto/sale.dto';
 import { Sale } from 'src/persistance/sale.interface';
 
 @Controller('sale')
 export class SaleController {
-    constructor(private readonly saleService: SaleService) {}
+  constructor(private readonly saleService: SaleService) {}
 
   @Post()
   async create(@Body() createSaleDto: CreateSaleDto): Promise<Sale> {
@@ -15,6 +23,16 @@ export class SaleController {
   @Get()
   async findAll(): Promise<Sale[]> {
     return this.saleService.findAll();
+  }
+
+  @Get('summary/:item')
+  async summarizeByItem(): Promise<Record<string, number>> {
+    return this.saleService.summarizeByItem();
+  }
+
+  @Get('summary/:client')
+  async summarizeByClient(): Promise<Record<string, number>> {
+    return this.saleService.summarizeByClient();
   }
 
   @Patch(':id')
